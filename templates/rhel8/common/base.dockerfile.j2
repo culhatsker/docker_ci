@@ -200,10 +200,13 @@ ARG INSTALL_SOURCES="no"
 
 # hadolint ignore=SC2016
 RUN sed -i -e 's|https://vault.centos.org/centos/8/PowerTools/$arch/os/Packages/gflags-devel-2.1.2-6|http://mirror.centos.org/centos/8-stream/PowerTools/$arch/os/Packages/gflags-devel-2.2.2-1|g' ${INTEL_OPENVINO_DIR}/install_dependencies/install_openvino_dependencies.sh && \
-    sed -i -e 's|https://vault.centos.org/centos/8/PowerTools/$arch/os/Packages/gflags-2.1.2-6|http://mirror.centos.org/centos/8-stream/PowerTools/$arch/os/Packages/gflags-2.2.2-1|g' ${INTEL_OPENVINO_DIR}/install_dependencies/install_openvino_dependencies.sh
+    sed -i -e 's|https://vault.centos.org/centos/8/PowerTools/$arch/os/Packages/gflags-2.1.2-6|http://mirror.centos.org/centos/8-stream/PowerTools/$arch/os/Packages/gflags-2.2.2-1|g' ${INTEL_OPENVINO_DIR}/install_dependencies/install_openvino_dependencies.sh && \
+    sed -i -e 's|libvpx-1.7.0-8.el8|libvpx-1.7.0-10.el8|g' ${INTEL_OPENVINO_DIR}/install_dependencies/install_openvino_dependencies.sh && \
+    sed -i -e 's|gstreamer1-plugins-bad-free-1.16.1-1.el8|gstreamer1-plugins-bad-free-1.16.1-4.el8|g' ${INTEL_OPENVINO_DIR}/install_dependencies/install_openvino_dependencies.sh && \
 
 WORKDIR /thirdparty
 # hadolint ignore=DL3031, DL3033, SC2012
+RUN sed -i "s"
 {% if 'openshift' == rhel_platform -%}
 RUN rm /etc/rhsm-host && rpm -qa --qf "%{name}\n" > base_packages.txt && \
 {%- else -%}
@@ -211,8 +214,6 @@ RUN rpm -qa --qf "%{name}\n" > base_packages.txt && \
 {%- endif %}
 	yum install -y ${LGPL_DEPS} && \
 	${INTEL_OPENVINO_DIR}/install_dependencies/install_openvino_dependencies.sh -y $INSTALL_PACKAGES && \
- 	yum install -y http://mirror.centos.org/centos/8-stream/AppStream/x86_64/os/Packages/libvpx-1.7.0-10.el8.x86_64.rpm && \
-  	yum install -y http://mirror.centos.org/centos/8-stream/AppStream/x86_64/os/Packages/gstreamer1-plugins-bad-free-1.16.1-4.el8.x86_64.rpm && \
 	if [ "$INSTALL_SOURCES" = "yes" ]; then \
 	    yum install -y yum-utils && \
 		rpm -qa --qf "%{name}\n" > all_packages.txt && \
