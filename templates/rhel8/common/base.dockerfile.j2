@@ -206,7 +206,6 @@ RUN sed -i -e 's|https://vault.centos.org/centos/8/PowerTools/$arch/os/Packages/
 
 WORKDIR /thirdparty
 # hadolint ignore=DL3031, DL3033, SC2012
-RUN sed -i "s"
 {% if 'openshift' == rhel_platform -%}
 RUN rm /etc/rhsm-host && rpm -qa --qf "%{name}\n" > base_packages.txt && \
 {%- else -%}
