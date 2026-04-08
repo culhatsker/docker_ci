@@ -1,2 +1,3 @@
 WORKDIR ${INTEL_OPENVINO_DIR}/licensing
 RUN curl -L https://raw.githubusercontent.com/openvinotoolkit/docker_ci/master/dockerfiles/rhel8/third-party-programs-docker-runtime.txt --output third-party-programs-docker-runtime.txt
+RUN cp third-party-programs-docker-runtime.txt /licenses

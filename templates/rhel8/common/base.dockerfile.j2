@@ -77,7 +77,7 @@ RUN if [ "$INSTALL_SOURCES" = "no" ]; then \
     fi
 
 WORKDIR /licenses
-RUN cp -rf "${INTEL_OPENVINO_DIR}"/licensing /licenses
+RUN cp -rf "${INTEL_OPENVINO_DIR}"/licensing/* /licenses
 
 {% for command in commands %}
 {{ command|safe }}
