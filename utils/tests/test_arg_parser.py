@@ -20,8 +20,6 @@ default_args: dict[str, Any] = {
     'layers': [],
     'linter_check': [],
     # 'mode':'build',
-    'msbuild': None,
-    'pre_stage_msbuild': None,
     'rhel_platform': 'docker',
     'os': 'ubuntu22',
     'package_url': None,
