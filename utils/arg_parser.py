@@ -23,6 +23,7 @@ class DockerCIArgumentParser(argparse.ArgumentParser):
     SUPPORTED_OS: typing.List = [
         "ubuntu22",
         "ubuntu24",
+        "ubuntu26",
         "rhel8",
     ]
 
