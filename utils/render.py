@@ -67,6 +67,7 @@ class DockerFileRender:
                 resources = {}
             params["resources"] = resources
             params["devices"] = args.device
+            params["source"] = args.source
             for device in args.device:
                 params[f"device_{device}"] = True
             log.warning(f"TEMPLATE ENV: {params}")
