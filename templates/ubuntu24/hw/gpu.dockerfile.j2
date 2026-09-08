@@ -4,7 +4,7 @@ RUN apt-get update && \
     apt-get clean ; \
     rm -rf /var/lib/apt/lists/* && rm -rf /tmp/*
 
-# GFX driver version 24.48.31907.7
+# GFX driver version 26.14.37833.4
 # hadolint ignore=DL3003
 RUN mkdir /tmp/gpu_deps && cd /tmp/gpu_deps \
     && curl -L -O https://github.com/intel/intel-graphics-compiler/releases/download/v2.32.7/intel-igc-core-2_2.32.7+21184_amd64.deb \
@@ -13,6 +13,4 @@ RUN mkdir /tmp/gpu_deps && cd /tmp/gpu_deps \
     && curl -L -O https://github.com/intel/compute-runtime/releases/download/26.14.37833.4/intel-opencl-icd_26.14.37833.4-0_amd64.deb \
     && curl -L -O https://github.com/intel/compute-runtime/releases/download/26.14.37833.4/libigdgmm12_22.9.0_amd64.deb \
     && curl -L -O https://github.com/intel/compute-runtime/releases/download/26.14.37833.4/libze-intel-gpu1_26.14.37833.4-0_amd64.deb \
-    && curl -L -O https://github.com/intel/compute-runtime/releases/download/26.14.37833.4/ww14.sum \
-    && sha256sum -c ww14.sum \
     && dpkg -i ./*.deb && rm -Rf /tmp/gpu_deps
