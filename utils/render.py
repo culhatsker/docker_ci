@@ -29,7 +29,7 @@ class DockerFileRender:
             self.templates_path, ('.*\\.j2', '.*\\.json', '.*\\.txt',))
         self.env = jinja2.Environment(loader=jinja2.FileSystemLoader(self.templates_folders), autoescape=True)
 
-    def get_new_base_template(self) -> jinja2.environment.Template:
+    def get_new_base_template(self) -> typing.Optional[jinja2.environment.Template]:
         try:
             return self.env.get_template('dockerfile.j2')
         except jinja2.exceptions.TemplateNotFound:
@@ -52,10 +52,10 @@ class DockerFileRender:
                             kwargs: typing.Dict[str, str]) -> pathlib.Path:
         """Creating of dockerfile based on templates and CLI parameters"""
 
-        save_to = save_to_dir / args.dockerfile_name
         if args.rhel_platform != 'docker':
             save_to_dir /= args.rhel_platform
         save_to_dir.mkdir(parents=True, exist_ok=True)
+        save_to = save_to_dir / args.dockerfile_name
 
         new_base_template = self.get_new_base_template()
         if new_base_template:
@@ -70,7 +70,7 @@ class DockerFileRender:
             params["source"] = args.source
             for device in args.device:
                 params[f"device_{device}"] = True
-            log.warning(f"TEMPLATE ENV: {params}")
+            log.debug(f"TEMPLATE ENV: {params}")
             new_base_template.stream(**params).dump(str(save_to))
         else:
             pre_stage = []
