@@ -6,7 +6,6 @@ import argparse
 import contextlib
 import pathlib
 import re
-import subprocess  # nosec
 import sys
 import typing
 import logging
@@ -405,7 +404,6 @@ def parse_args(name: str, description: str):  # noqa
             parser.error(
                 "Can not get image OS from package URL or tags. " "Please specify -os directly"
             )
-
 
     if args.mode == "test" and not (args.tags and args.distribution):
         parser.error(

@@ -26,7 +26,7 @@ class DockerFileRender:
         self.os_target = os_target
         self.templates_path = os.path.join(self.location, 'templates', os_target)
         self.templates_folders = get_folder_structure_recursively(
-            self.templates_path, ('.*\\.j2', '.*\\.json', '.*\\.txt',))
+            self.templates_path, ('.*\\.j2', '.*\\.json', '.*\\.txt'))
         self.env = jinja2.Environment(loader=jinja2.FileSystemLoader(self.templates_folders), autoescape=True)
 
     def get_new_base_template(self) -> typing.Optional[jinja2.environment.Template]:
