@@ -39,7 +39,7 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends ./*.deb \
     && rm -rf * \
 {%- endif %}
-{% if device_npu -%}
+{% if False and device_npu -%}
     && curl -L "{{ resources.npu_archive_url }}" | tar -xzf - \
     && apt-get install -y --no-install-recommends libze1 ./*.deb \
     && rm -rf * \
